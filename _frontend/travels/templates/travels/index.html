@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 
+{% block title %}<title>Lista viaggi per ID=1</title>{% endblock %}
+
 {% block body %}
 <div class="container-fluid">
-	<p>saluto</p>: {{ ciao }}
+	<h1>Travels from user with ID 1</h1>
+	{% for row in travelogs %}
+		<em>He left on</em>: {{ row.starting_date|truncatechars:13 }}
+		<em>He was back on</em>: {{ row.ending_date|truncatechars:13 }}
+		<hr>
+	{% endfor %}
 </div>
 {% endblock %}
