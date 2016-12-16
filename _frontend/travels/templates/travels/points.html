@@ -1,24 +1,20 @@
 {% extends 'base.html' %}
 
-{% block title %}<title>Lista dei post </title>{% endblock %}
+{% block title %}<title>Lista dei points </title>{% endblock %}
 
 {% block body %}
 <div class="container-fluid">
 
 	<h1>Travels from user with ID 1</h1>
 	<em><a href="{% url 'home' %}">Back</a>&nbsp;to the list of trips</em>
-	{% for row in posts %}
-		<p>We have a post called {{ row.text }}</p>
-		<p>
-			The address is: {{ row.place_json }}
-		</p>
+	{% for row in points %}
 		<em>Longitude</em>: {{ row.longitude|truncatechars:8 }}
 		<em>Latitude</em>: {{ row.latitude|truncatechars:8 }}
-		<hr>
-		<img src="data:image/jpg;base64,{{ row.thumb_data_b64 }}/">
+		<em>timezone</em>: {{ row.gmtdelta }}
+
 		<hr>
 	{% empty %}
-		<br><strong>Sorry, there were no post related to this trip</strong>
+		<br><strong>Sorry, there were no points recorded for this trip</strong>
 		<hr>
 	{% endfor %}
 	<a href="{% url 'home' %}">Back</a>&nbsp;to the list of trips
