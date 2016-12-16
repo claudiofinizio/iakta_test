@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}All posts{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+	<form method="post">{% csrf_token %}
+	    {{ form.as_p }}
+	    <input type="submit" value="Submit" />
+	</form>
+	<em>DATA FORMAT:</em> please, enter the date in this format: 2016-12-07 14:37:05
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}All posts{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+	<h1>All posts</h1>
+
+
+	<ul>
+	    {% for post in post_list %}
+	    <li>{{ post.title }}  :  
+	    <a href="{% url "post_edit" post.pk %}">Edit</a>
+	    <a href="{% url "post_delete" post.pk %}">delete</a>
+	    </li>
+	    {% empty %}
+	    <strong>No posts so far, click the link below to begin entering posts</strong>
+	    {% endfor %}
+	</ul>
+</div>
+<hr>
+<a href="{% url "post_new" %}">New post</a>
+{% endblock %}
