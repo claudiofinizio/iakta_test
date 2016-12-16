@@ -26,3 +26,20 @@ def index(request):
     return render(request, page, context)
     
     
+def posts(request, pk):
+    page = 'travels/posts.html'
+    context={}
+    requested_url = '/'.join([
+        IAKTA_BASE_URL,
+        POSTS,
+        str(pk),
+    ])
+    data = json_query.decode_from_iakta_website(requested_url)
+    pprint(data['posts'])
+    
+    # Decode addresses
+    
+    
+    context['posts'] = data['posts']
+    return render(request, page, context)
+    

@@ -6,8 +6,11 @@
 <div class="container-fluid">
 	<h1>Travels from user with ID 1</h1>
 	{% for row in travelogs %}
+        <b>The {{ row.name }} trip</b>
+        <br>
 		<em>He left on</em>: {{ row.starting_date|truncatechars:13 }}
 		<em>He was back on</em>: {{ row.ending_date|truncatechars:13 }}
+        <b><a href="{% url 'travel-posts' row.id %}">See the posts</a>&nbsp;collected from this trip</b>
 		<hr>
 	{% endfor %}
 </div>
