@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}<title>Lista dei points </title>{% endblock %}
 
@@ -7,7 +8,8 @@
 
 <h1>Points from user</h1>
 	<h1><small>I refer to travel: "{{ travel.name }}"</small></h1>
-	<em><a href="{% url 'home' %}">Back</a>&nbsp;to the list of trips</em>
+	<strong><a href="{% url 'home' %}">Back</a>&nbsp;to the list of trips</strong>
+	<br>
 	{% for row in points %}
 		<em>Longitude</em>: {{ row.longitude|truncatechars:8 }}
 		<em>Latitude</em>: {{ row.latitude|truncatechars:8 }}
@@ -18,6 +20,60 @@
 		<br><strong>Sorry, there were no points recorded for this trip</strong>
 		<hr>
 	{% endfor %}
+
+	<div id="map" style="width: 500px; height: 400px;"></div>
+	<script src="http://maps.google.com/maps/api/js?key=AIzaSyD7KIGHBdVRC344M2CrwIsysK_cUfjzEl8" type="text/javascript"></script>
+	<script>
+		var locations = [
+		{% for row in points %}
+				['place', {{ row.latitude }}, {{ row.longitude }}],
+		{% endfor %}
+		];
+		
+		var map = new google.maps.Map(document.getElementById('map'), {
+		  zoom: 10,
+		  center: new google.maps.LatLng({{ map_center.latitude_center}}, {{ map_center.longitude_center}}),
+		  mapTypeId: google.maps.MapTypeId.ROADMAP
+		});
+
+		var infowindow = new google.maps.InfoWindow();
+
+		var marker, i;
+
+	    for (i = 0; i < locations.length; i++) {  
+    		console.log('marco');
+	      marker = new google.maps.Marker({
+	        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+	        map: map
+	      });
+
+	        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+	          return function() {
+	            infowindow.setContent(locations[i][0]);
+	            infowindow.open(map, marker);
+	          }
+	        })(marker, i));
+	      }
+
+
+	</script>
+
+
+
+
+
+
+
+
+
+
 	<a href="{% url 'home' %}">Back</a>&nbsp;to the list of trips
 </div>
 {% endblock %}
+
+{% block javascript %}
+{% endblock %}
+
+
+
+

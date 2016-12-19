@@ -7,7 +7,7 @@
 
 	<h1>Posts from user</h1>
 	<h1><small>I refer to travel: "{{ travel.name }}"</small></h1>
-	<em><a href="{% url 'home' %}">Back</a>&nbsp;to the list of trips</em>
+	<strong><a href="{% url 'home' %}">Back</a>&nbsp;to the list of trips</strong>
 	{% for row in posts %}
 		<p>We have a post called {{ row.text }}</p>
 		<p>

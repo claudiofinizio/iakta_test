@@ -37,18 +37,15 @@ def posts(request, travel_pk):
     
     
 def points(request, travel_pk):
-    page = 'travels/points.html'
-    context={}
-    # requested_url = '/'.join([
-        # IAKTA_BASE_URL,
-        # POINTS,
-        # str(pk),
-    # ])
-    # data = json_query.decode_from_iakta_website(requested_url)
-    
-    # pprint(data['points'])
-    context['points'] = callables.travel_points(travel_pk)
-    # context['points'] = data['points']
+    if 233. < int(travel_pk) < 240.:
+        page = 'travels/points.html'
+        context={}
+        # Retrive info on the travel identified by pk in the signature 
+        context['points'] = callables.travel_points(travel_pk)
+        context['map_center'] = callables.map_center(context['points'])
+        # Optionally, retrieve posts for a given travel
+        context['travel'] = callables.filter_travelogs(travel_pk)
+    else:
+        raise Http404 
     return render(request, page, context)
-    
     

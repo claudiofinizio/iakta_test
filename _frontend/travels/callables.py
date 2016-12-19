@@ -48,10 +48,17 @@ def travel_points(travel_pk):
     
 def filter_travelogs(travel_pk):
     travelogs = travelogs_all()
-    print('MINCHIA')
-    pprint(travelogs)
     return [
             travel for travel in travelogs if str(travel['id'])==str(travel_pk)
         ][0]
     
-    
+def map_center(point_list):
+    pprint(point_list)
+    latitude_list = [float(e['latitude']) for e in point_list]
+    latitude_center = sum(latitude_list) / len(latitude_list)
+    longitude_list = [float(e['longitude']) for e in point_list]
+    longitude_center = sum(longitude_list) / len(longitude_list)
+    return {
+        'latitude_center': latitude_center,
+        'longitude_center': longitude_center,
+    }
