@@ -22,9 +22,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '#fs_sttyyx(cwi&7re3kiio9qypyst=hvr16fot=uuy5@htiq)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# Debug
 DEBUG = True
-
 ALLOWED_HOSTS = []
+# Production
+'''
+DEBUG = False
+ALLOWED_HOSTS = ['*']
+'''
 
 
 # Application definition

@@ -5,7 +5,8 @@
 {% block body %}
 <div class="container-fluid">
 
-	<h1>Travels from user with ID 1</h1>
+	<h1>Posts from user</h1>
+	<h1><small>I refer to travel: "{{ travel.name }}"</small></h1>
 	<em><a href="{% url 'home' %}">Back</a>&nbsp;to the list of trips</em>
 	{% for row in posts %}
 		<p>We have a post called {{ row.text }}</p>
@@ -15,8 +16,10 @@
 		<em>Longitude</em>: {{ row.longitude|truncatechars:8 }}
 		<em>Latitude</em>: {{ row.latitude|truncatechars:8 }}
 		<hr>
-		<img src="data:image/jpg;base64,{{ row.thumb_data_b64 }}/">
-		<hr>
+		{% if row.thumb_data_b64 %}
+			<img src="data:image/jpg;base64,{{ row.thumb_data_b64 }}" alt="Post's picture">
+			<hr>
+		{% endif %}
 	{% empty %}
 		<br><strong>Sorry, there were no post related to this trip</strong>
 		<hr>

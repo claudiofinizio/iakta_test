@@ -5,7 +5,8 @@
 {% block body %}
 <div class="container-fluid">
 
-	<h1>Travels from user with ID 1</h1>
+<h1>Points from user</h1>
+	<h1><small>I refer to travel: "{{ travel.name }}"</small></h1>
 	<em><a href="{% url 'home' %}">Back</a>&nbsp;to the list of trips</em>
 	{% for row in points %}
 		<em>Longitude</em>: {{ row.longitude|truncatechars:8 }}
